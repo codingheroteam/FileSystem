@@ -1,0 +1,134 @@
+
+.knobs,
+.layer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+ 
+.button {
+    position: relative;
+    /* top: 50%; */
+    width: 6rem;
+    height: 3rem;
+    /* margin: -20px auto 0 auto; */
+    overflow: hidden;
+}
+ 
+.button.r,
+.button.r .layer {
+    border-radius: 100px;
+}
+ 
+
+ 
+.checkbox {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 3;
+    outline: #000 solid 1px;
+}
+
+.knobs {
+    z-index: 2;
+}
+ 
+.layer {
+    width: 100%;
+    background-color: #ebf7fc;
+    transition: 0.3s ease all;
+    z-index: 1;
+}
+ 
+
+/* 小圆圈 */
+#button-9 .knobs:before,
+#button-9 .knobs:after,
+#button-9 .knobs span {
+    position: absolute;
+    top: 0.25rem;
+    width: calc(3rem - 0.5rem);
+    height: calc(3rem - 0.5rem);
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    /* padding: 0.5rem 0.1rem; */
+    /* padding: auto; */
+    border-radius: 50%;
+    transition: 0.4s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+    /* align-items: center; */
+    margin: auto;
+}
+ 
+
+#button-9 .knobs:before {
+    content: '   ';
+    left: 0.75rem;
+    top: 0.75rem;
+    background-image: url(../wenjianjia.svg);
+    background-size: contain; /* 确保图片缩放以适应按钮 */
+    background-position: center; /* 将图片居中 */
+    background-repeat: no-repeat; /* 防止图片重复 */
+    width: calc(3rem - 1.5rem);
+    height: calc(3rem - 1.5rem);
+    border-radius: 0;
+    color: #fff;
+    display: inline-block; /* 确保其作为行内元素 */
+    line-height: 26px; /* 确保文本和图片对齐 */
+}
+
+
+
+#button-9 .knobs:after {
+    content: '   ';
+    right: -3rem;
+    top: 0.75rem;
+    background-image: url(../zhongduan.svg);
+    background-size: contain; /* 确保图片缩放以适应按钮 */
+    background-position: center; /* 将图片居中 */
+    background-repeat: no-repeat; /* 防止图片重复 */
+    width: calc(3rem - 1.5rem);
+    height: calc(3rem - 1.5rem);
+    border-radius: 0;
+    color: #fff;
+    display: inline-block; /* 确保其作为行内元素 */
+    line-height: 16px; /* 确保文本和图片对齐 */
+
+}
+
+
+#button-9 .knobs:before,
+#button-9 .knobs:after {
+    color: #fff;
+    z-index: 2;
+}
+ 
+#button-9 .knobs span {
+    left: 4px;
+    background-color: #03a9f4;
+    z-index: 1;
+}
+ 
+#button-9 .checkbox:checked + .knobs:before {
+    left: -24px;
+}
+ 
+#button-9 .checkbox:checked + .knobs:after {
+    right: 10px;
+}
+ 
+#button-9 .checkbox:checked + .knobs span {
+    left: calc(3rem + 5px);
+    background-color: #02003a;
+}
+ 
+#button-9 .checkbox:checked ~ .layer {
+    background-color: #f0fceb;
+}

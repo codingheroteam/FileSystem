@@ -1,0 +1,299 @@
+body {
+  /* font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; */
+  width: 100vw;
+  height: 100vh;
+  background: #00B7FF !important;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+  
+}
+
+html {
+  overflow-y: overlay;
+}
+
+
+
+#bodytitle {
+  height: 10vh;
+  display: flex;
+  align-content:center;
+  justify-content:space-between;
+  padding: 10px 20px 0px 10px;
+  text-align: center;
+  margin: auto;
+  align-items: center;
+  color: white;
+}
+
+
+#terminalcontainer,
+#fileeditor,
+#uicontainer {
+  background-color: #e3eeff;
+  border-radius: 5px;
+  overflow: hidden;
+  height: calc(90vh - 20px);
+  margin: 10px;
+}
+
+#terminalcontainer{
+  background-color: #e9ffe3;
+}
+
+
+a {
+  color: #00B7FF;
+}
+
+.fileitem,
+.diritem {
+  /* background-color: lightblue; */
+  padding: 10px;
+  text-align: center;
+  color: black;
+  font-size: 1rem;
+  border-radius: 25px;
+  transition: all 0.2s;
+  /* border: 1px solid #ffffff; */
+  /* outline: 0px solid lightblue; */
+}
+
+.fileitem:hover,
+.diritem:hover {
+  background-color: #add8e6;
+  outline: 3px solid #ccc;
+}
+
+.mbtn {
+  border: none;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  background: rgba(255, 255, 255, 0.5);
+  margin: 3px;
+  padding: 5px;
+  border-radius: 5px;
+
+  overflow: hidden;
+  color: #000000;
+}
+
+.mbtn:hover {
+  background: rgb(163, 163, 163);
+  opacity: 1;
+
+}
+
+
+.modebtn {
+  transition: all 0.2s ease-in-out;
+  margin: 3px;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  overflow: hidden;
+  color: #bbbbbb99;
+  background: #ffffff00;
+}
+
+.modebtn:hover {
+  background: #eee;
+  color: #333;
+
+}
+
+
+
+
+
+#dircontainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+}
+
+
+#leftarea {
+  width: 80%;
+  height: calc(80vh - 20px);
+  padding: 10px;
+  overflow: auto;
+  overflow-y: scroll;
+  overflow-y: overlay;
+}
+
+
+#descrip {
+  background-color: aliceblue;
+  width: 20%;
+  height: calc(80vh - 20px);
+  padding: 10px;
+  /* color: #19ff7d; */
+}
+
+.hide {
+  display: none;
+}
+
+.icon {
+  width: 4rem;
+}
+
+
+
+#fileheader,
+#terminalheader,
+#uiheader {
+  font-weight: bold;
+  font-size: 1rem;
+  background-color: rgba(139, 139, 139, 0.2);
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  text-align: center;
+  align-content:center;
+  justify-content:space-between;
+  height: 10vh;
+  
+}
+
+#terminalheader {
+  background-color: #8f8f8f;
+}
+
+#contentcontainer {
+  display: flex;
+}
+
+
+.mbtn:disabled {
+  border: none;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  background: rgba(255, 255, 255, 0.5);
+  margin: 3px;
+  padding: 5px;
+  border-radius: 5px;
+  overflow: hidden;
+  color: #c7c7c7;
+}
+
+
+#descriptitle {
+  text-align: center;
+  align-items: center;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+
+}
+
+#descripiconicon {
+  width: 3rem;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+textarea {
+  width: 100%;
+  overflow: auto;
+  word-break: break-all;
+}
+
+.container {
+  position: relative;
+  /* border: 2px solid black; */
+  /* padding: 20px; */
+  width: 6rem !important;
+  align-items: center;
+  text-align: center;
+  /* margin-right: -10px; */
+  margin: auto;
+  padding: auto;
+}
+
+.link::before,
+.link::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+}
+
+.link::before {
+  bottom: 0px;
+  left: 20px;
+  background-image: url('../link.svg');
+  background-size: cover;
+}
+
+.file-upload { 
+  display: none;
+}
+
+
+
+ /* 去除默认样式 */
+  textarea {
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: none;
+    background-color: transparent;
+    font-size: inherit;
+    width: 100%;
+  }
+
+  textarea:focus {
+    outline: none;
+  }
+
+  /* 自定义样式 */
+  .mo-textarea {
+    display: inline-block;
+    resize: vertical;
+    padding: 5px 15px;
+    line-height: 1.5;
+    box-sizing: border-box;
+    /* color: #606266; */
+    background-color: #fff;
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+    transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+
+  /* 提示文字 */
+  .mo-textarea::placeholder {
+    color: #c0c4cc;
+  }
+
+  /* 鼠标hover */
+  .mo-textarea:hover {
+    border-color: #c0c4cc;
+  }
+
+
+
+  .green {
+    background: #02003a !important;
+  }
+
+  .blue {
+    background: #269acc !important;
+  }
+
+
+  .itemname {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  };

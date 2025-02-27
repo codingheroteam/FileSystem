@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  script(src='/javascripts/login.js')
+
+  h1= 登录
+  p 请输入用户名 #{title}
+  input#account
+  p 密码 #{title}
+  input#password
+  p 请先登录
+  button(onclick='onLoginClicked()') 登录

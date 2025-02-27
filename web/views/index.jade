@@ -1,0 +1,77 @@
+extends layout
+
+block content
+  script(src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.min.js")
+  script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js")
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/antd/5.18.0/antd.min.js")
+  link(href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.min.css" rel="stylesheet")
+  link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet")
+
+  link(rel="stylesheet" href="//cdn.jsdelivr.net/npm/element-plus/dist/index.css")
+  <!-- Import Vue 3 -->
+  <script src="//cdn.jsdelivr.net/npm/vue@3"></script>
+  <!-- Import component library -->
+  <script src="//cdn.jsdelivr.net/npm/element-plus"></script>
+
+  input.file-upload(type="file" accept="image/*" name="picture")
+  div#bodytitle 
+    h1(style="margin: 3px;") 操作系统课程设计-文件系统
+    //- h1.modebtn(onclick='onButtonClicked(1)') 更新
+    div.button.r#button-9(onclick='changeShow()')
+      input.checkbox(type="checkbox")
+      div.knobs
+          span
+      div.layer
+
+
+
+  div#terminalcontainer
+    div#terminalheader
+      div(style="width: 50%;  text-align: left;") 
+        span 终端
+        span
+      div
+        
+    div#contentcontainer
+      div#terminal(style="background: #010106; overflow: hidden; padding: 20px !important; width: 100vw")
+
+
+
+  
+  div#fileeditor.hide
+    div#fileheader
+      div#filetitle 文件名
+      div
+        button.mbtn(onclick='onSaveClicked()') 保存
+        button.mbtn(onclick='exitEditor()') 退出
+    div
+      textarea#editorarea.mo-textarea(name="", cols="80", rows="24") 
+
+  div#uicontainer
+    div#uiheader
+      div(style="width: 50%;  text-align: left;") 
+        span#username
+        &#58;
+        span#path
+      div
+        button.mbtn(onclick='refresh()') 刷新
+        button.mbtn(onclick='newFolder()') 新建文件夹
+        button.mbtn(onclick='newFile()') 新建文件
+        button.mbtn#paste(onclick='onPasteClick()' type="button" disabled) 粘贴
+        button#loginout.mbtn(onclick='logout()') 退出登录
+        button.mbtn(onclick='format()') 载入样例数据
+    div#contentcontainer
+      div#leftarea
+        div#dircontainer
+      div#descrip
+        div.container#container
+          img#descripiconicon.main-img
+        b#descriptitle
+        div#infobox
+        div#functionlist
+
+
+
+  script(src='/javascripts/index.js')
+
+  

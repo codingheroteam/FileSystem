@@ -1,0 +1,191 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('manage:server');
+var http = require('http');
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '4535');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+
+
+
+
+
+const WebSocket = require('ws');
+const { spawn } = require('child_process');
+const pty = require('node-pty');
+const wss = new WebSocket.Server({ server });
+
+
+let count = 0;
+
+
+
+wss.on('connection', (ws) => {
+  console.log('WebSocket connection established.');
+
+  // const shell = spawn('./public/test.o', []);
+
+  // if (count == 0) {
+  //   runshell();
+  // }
+
+  // 修改这里的命令为你要执行的程序及其参数
+  const program = '../os/build/main_d'; // 替换为你的程序名
+  const args = ['./public/test.c', 'value1']; // 替换为你的程序参数
+  let shell;
+
+
+  function runshell() {
+    shell = pty.spawn(program, args, {
+      name: 'xterm-color',
+      cols: 80,
+      rows: 30,
+      cwd: process.cwd(),
+      env: process.env
+    });
+  }
+  runshell();
+
+
+
+
+  ws.send(`连接已建立，当前连接数： ${++count}\r\n`);
+
+
+
+  // shell.write("ls\n");
+
+
+
+  shell.on('data', (data) => {
+    ws.send(data);
+  });
+
+  shell.on('exit', (code) => {
+    ws.send(`Program exited with code ${code}`);
+  });
+
+
+  //  const shell = spawn(program, args, {
+  //      stdio: ['pipe', 'pipe', 'pipe'], // 使用管道连接标准输入、输出和错误
+  //      detached: true, // 分离子进程以防止缓冲
+  //  });
+
+
+
+
+  //  shell.stdout.setEncoding('utf8');
+  //  shell.stderr.setEncoding('utf8');
+
+
+
+  // shell.stdout.pipe((data, val2) => {
+  //   console.log("消息：", data)
+  //     // ws.send(data.toString());
+  // });
+
+
+
+
+
+
+  ws.on('message', (message) => {
+    shell.write(message);
+  });
+
+  ws.on('close', () => {
+    console.log('WebSocket connection closed.');
+    count--;
+    shell.write("ht\n");
+  });
+
+  ws.on('error', (error) => {
+    console.error(`WebSocket error: ${error.message}`);
+  });
+
+});
+
+
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
